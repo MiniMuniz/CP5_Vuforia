@@ -3,35 +3,35 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float rotationSpeed = 0.2f;
+    public float velocidadeRotacao = 0.2f;
 
     private bool canInteract = false;
-    private bool rotationActive = false;
+    private bool rotacao = false;
 
     void Update()
     {
-        CheckTouch();
+        Touch();
 
-        if (rotationActive)
+        if (rotacao)
         {
-            CheckSwipe();
+            Swipe();
         }
     }
 
-    public void EnableInteraction()
+    public void Ligar()
     {
         canInteract = true;
     }
 
-    public void DisableInteraction()
+    public void Desligar()
     {
         canInteract = false;
-        rotationActive = false;
+        rotacao = false;
 
         transform.localScale = Vector3.one;
     }
-
-    void CheckTouch()
+    
+    void Touch()
     {
         if (!canInteract)
             return;
@@ -42,27 +42,27 @@ public class Manager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                ToggleCube();
+                AtivarModelo();
             }
         }
     }
 
-    void ToggleCube()
+    void AtivarModelo()
     {
-        if (!rotationActive)
+        if (!rotacao)
         {
-            transform.localScale = new Vector3(200, 100, 100);
-            rotationActive = true;
+            transform.localScale = new Vector3(80, 50, 50);
+            rotacao = true;
         }
         else
         {
-            transform.localScale = new Vector3(100, 100, 100);
+            transform.localScale = new Vector3(30, 30, 30);
 
-            rotationActive = false;
+            rotacao = false;
         }
     }
 
-    void CheckSwipe()
+    void Swipe()
     {
         Touch touch = Input.GetTouch(0);
 
@@ -70,13 +70,13 @@ public class Manager : MonoBehaviour
         {
             float movement = touch.deltaPosition.x;
 
-            RotateObject(movement);
+            GirarModelo(movement);
         }
     }
 
-    void RotateObject(float movement)
+    void GirarModelo(float movement)
     {
-        transform.Rotate(0, -movement * rotationSpeed, 0);
+        transform.Rotate(0, -movement * velocidadeRotacao, 0);
     }
 }
 
