@@ -42,12 +42,12 @@ public class Manager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                AtivarModelo();
+                AlterarModelo();
             }
         }
     }
 
-    void AtivarModelo()
+    void AlterarModelo()
     {
         if (!rotacao)
         {
